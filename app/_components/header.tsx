@@ -7,7 +7,13 @@ const Header = () => {
     <div className="flex justify-between px-5 pt-6">
       <div className="flex flex-row gap-2 ">
         <h1 className="text-2xl font-extrabold text-red-500">DEV</h1>
-        <Image src="/Logo.png" alt="Dev Foods" height={10} width={60} />
+        <Image
+          src="/logo.png"
+          alt="Dev Foods"
+          height={10}
+          width={60}
+          quality={100}
+        />
       </div>
       <Button
         size="icon"
