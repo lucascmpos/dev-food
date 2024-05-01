@@ -42,7 +42,7 @@ const ProductDetails = ({
       return currentState - 1;
     });
   return (
-    <div className="py-5">
+    <div className="relative z-50 mt-[-1.5rem] rounded-t-3xl bg-white py-5">
       <div className="flex items-center gap-[0.375rem] px-5">
         <div className="relative h-6 w-6">
           <Image
@@ -52,7 +52,9 @@ const ProductDetails = ({
             className="rounded-full object-cover"
           />
         </div>
-        <span className="text-xs text-muted-foreground">{product.name}</span>
+        <span className="text-xs text-muted-foreground">
+          {product.restaurant.name}
+        </span>
       </div>
       <h1 className="mb-2 mt-1 px-5 text-xl font-semibold">{product.name}</h1>
       <div className="flex justify-between px-5">
