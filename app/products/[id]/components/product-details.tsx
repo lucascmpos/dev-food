@@ -1,25 +1,35 @@
 "use client";
-import DiscountBadge from "@/app/_components/discount-badge";
-import { Button } from "@/app/_components/ui/button";
-import {
-  calculateProductTotalPrice,
-  formatCurrency,
-} from "@/app/_helpers/price";
-import { Prisma } from "@prisma/client";
-import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
-import Image from "next/image";
-import { useContext, useState } from "react";
 
-import ProductList from "@/app/_components/product-list";
+import Cart from "@/app/_components/cart";
 import DeliveryInfo from "@/app/_components/delivery-info";
-import { CartContext } from "@/app/_context/cart";
+import DiscountBadge from "@/app/_components/discount-badge";
+import ProductList from "@/app/_components/product-list";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/app/_components/ui/alert-dialog";
+import { Button } from "@/app/_components/ui/button";
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
 } from "@/app/_components/ui/sheet";
-import Cart from "@/app/_components/cart";
+import { CartContext } from "@/app/_context/cart";
+import {
+  formatCurrency,
+  calculateProductTotalPrice,
+} from "@/app/_helpers/price";
+import { Prisma } from "@prisma/client";
+import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
+import Image from "next/image";
+import { useContext, useState } from "react";
 
 interface ProductDetailsProps {
   product: Prisma.ProductGetPayload<{
@@ -40,14 +50,28 @@ const ProductDetails = ({
 }: ProductDetailsProps) => {
   const [quantity, setQuantity] = useState(1);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isConfirmationDialogOpen, setIsConfirmationDialogOpen] =
+    useState(false);
 
   const { addProductToCart, products } = useContext(CartContext);
 
-  console.log(products);
+  const addToCart = ({ emptyCart }: { emptyCart?: boolean }) => {
+    addProductToCart({ product, quantity, emptyCart });
+    setIsCartOpen(true);
+  };
 
   const handleAddToCartClick = () => {
-    addProductToCart(product, quantity);
-    setIsCartOpen(true);
+    const hasDifferentRestaurantProduct = products.some(
+      (cartProduct) => cartProduct.restaurantId !== product.restaurantId,
+    );
+
+    if (hasDifferentRestaurantProduct) {
+      return setIsConfirmationDialogOpen(true);
+    }
+
+    addToCart({
+      emptyCart: false,
+    });
   };
 
   const handleIncreaseQuantityClick = () =>
@@ -58,9 +82,10 @@ const ProductDetails = ({
 
       return currentState - 1;
     });
+
   return (
     <>
-      <div className="relative z-50 mt-[-1.5rem] rounded-t-3xl bg-white py-5">
+      <div className="relative z-50 mt-[-1.5rem] rounded-tl-3xl rounded-tr-3xl bg-white py-5">
         <div className="flex items-center gap-[0.375rem] px-5">
           <div className="relative h-6 w-6">
             <Image
@@ -74,7 +99,9 @@ const ProductDetails = ({
             {product.restaurant.name}
           </span>
         </div>
+
         <h1 className="mb-2 mt-1 px-5 text-xl font-semibold">{product.name}</h1>
+
         <div className="flex justify-between px-5">
           <div>
             <div className="flex items-center gap-2">
@@ -85,12 +112,14 @@ const ProductDetails = ({
                 <DiscountBadge product={product} />
               )}
             </div>
+
             {product.discountPercentage > 0 && (
               <p className="text-sm text-muted-foreground">
                 De: {formatCurrency(Number(product.price))}
               </p>
             )}
           </div>
+
           <div className="flex items-center gap-3 text-center">
             <Button
               size="icon"
@@ -130,14 +159,39 @@ const ProductDetails = ({
           </Button>
         </div>
       </div>
+
       <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>
-        <SheetHeader>
-          <SheetTitle className="text-left">Sacola</SheetTitle>
-        </SheetHeader>
-        <SheetContent className="w-[90vw] md:w-[70vw] lg:w-[60vw]">
+        <SheetContent className="md:[70vw] lg:[50vw] w-[90vw]">
+          <SheetHeader>
+            <SheetTitle className="text-left">Sacola</SheetTitle>
+          </SheetHeader>
+
           <Cart />
         </SheetContent>
       </Sheet>
+
+      <AlertDialog
+        open={isConfirmationDialogOpen}
+        onOpenChange={setIsConfirmationDialogOpen}
+      >
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>
+              Você só pode adicionar itens de um restaurante por vez
+            </AlertDialogTitle>
+            <AlertDialogDescription>
+              Deseja mesmo adicionar esse produto? Isso limpará sua sacola
+              atual.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+            <AlertDialogAction onClick={() => addToCart({ emptyCart: true })}>
+              Esvaziar sacola e adicionar
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </>
   );
 };
