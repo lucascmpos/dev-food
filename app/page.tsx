@@ -29,7 +29,7 @@ const Home = async () => {
   return (
     <>
       <Header />
-      <div className="px-5 pt-6">
+      <div className="w-full px-5 pt-6">
         <Search />
       </div>
       <div className="px-5 pt-6">
@@ -44,13 +44,13 @@ const Home = async () => {
 
       <div className="space-y-4 pt-6">
         <div className="flex flex-row items-center justify-between px-5">
-          <h2 className="font-semibold">Produtos recomendados</h2>
+          <h2 className="font-semibold lg:text-3xl">Produtos recomendados</h2>
           <Button
             variant="ghost"
             className="h-fit p-0 text-primary hover:bg-transparent"
             asChild
           >
-            <Link href="/products/recommended">
+            <Link className="lg:text-3xl" href="/products/recommended">
               Ver todos
               <ChevronRightIcon size={16} />
             </Link>
@@ -67,13 +67,15 @@ const Home = async () => {
 
       <div className="space-y-4 py-6 pt-6">
         <div className="flex flex-row items-center justify-between px-5">
-          <h2 className="font-semibold">Restaurantes recomendados</h2>
+          <h2 className="font-semibold lg:text-3xl">
+            Restaurantes recomendados
+          </h2>
           <Button
             variant="ghost"
             className="h-fit p-0 text-primary hover:bg-transparent"
             asChild
           >
-            <Link href="/restaurants/recommended">
+            <Link className="lg:text-3xl" href="/restaurants/recommended">
               Ver todos
               <ChevronRightIcon size={16} />
             </Link>

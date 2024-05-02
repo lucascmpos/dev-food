@@ -25,7 +25,7 @@ const Search = () => {
   };
 
   return (
-    <form className="flex gap-2" onSubmit={handleSearchSubmit}>
+    <form className="flex justify-center gap-2" onSubmit={handleSearchSubmit}>
       <Input
         placeholder="Buscar restaurantes"
         className="border-none"

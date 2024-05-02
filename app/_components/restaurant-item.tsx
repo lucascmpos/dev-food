@@ -15,15 +15,15 @@ interface RestaurantItemProps {
 const RestaurantItem = ({ restaurant, className }: RestaurantItemProps) => {
   return (
     <Link
-      className={cn("min-w-[266px] max-w-[266px]", className)}
+      className={cn("min-w-[266px] max-w-[266px] lg:min-w-full", className)}
       href={`/restaurants/${restaurant.id}`}
     >
       <div className="w-full space-y-3">
-        <div className="relative h-[136px] w-full">
+        <div className="relative h-[136px] w-full lg:h-[150px]">
           <Image
             src={restaurant.imageUrl}
             fill
-            className="rounded-lg object-cover"
+            className="rounded-lg object-cover "
             alt={restaurant.name}
           />
           <div className="absolute left-2 top-2 flex items-center gap-[2px] rounded-full bg-white px-2 py-[2] text-black">

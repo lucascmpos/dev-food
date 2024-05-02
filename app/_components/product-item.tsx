@@ -22,11 +22,11 @@ interface ProductItemProps {
 const ProductItem = ({ product, className }: ProductItemProps) => {
   return (
     <Link
-      className={cn("w-[150px] min-w-[150px]", className)}
+      className={cn("w-[150px] min-w-[150px] lg:min-w-full", className)}
       href={`/products/${product.id}`}
     >
       <div className="w-full space-y-2 ">
-        <div className="relative aspect-square h-[150px] w-full">
+        <div className="relative aspect-square h-[150px] w-full lg:h-[250px]">
           <Image
             src={product.imageUrl}
             alt={product.name}
