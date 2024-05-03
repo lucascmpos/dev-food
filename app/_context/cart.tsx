@@ -10,7 +10,9 @@ export interface CartProduct
     include: {
       restaurant: {
         select: {
+          id: true;
           deliveryFee: true;
+          deliveryTimeMinutes: true;
         };
       };
     };
@@ -22,8 +24,8 @@ interface ICartContext {
   products: CartProduct[];
   subtotalPrice: number;
   totalPrice: number;
-  totalQuantity: number;
   totalDiscounts: number;
+  totalQuantity: number;
   addProductToCart: ({
     product,
     quantity,
@@ -33,7 +35,9 @@ interface ICartContext {
       include: {
         restaurant: {
           select: {
+            id: true;
             deliveryFee: true;
+            deliveryTimeMinutes: true;
           };
         };
       };
@@ -41,9 +45,10 @@ interface ICartContext {
     quantity: number;
     emptyCart?: boolean;
   }) => void;
-  increaseProductQuantity: (productId: string) => void;
   decreaseProductQuantity: (productId: string) => void;
+  increaseProductQuantity: (productId: string) => void;
   removeProductFromCart: (productId: string) => void;
+  clearCart: () => void;
 }
 
 export const CartContext = createContext<ICartContext>({
@@ -53,9 +58,10 @@ export const CartContext = createContext<ICartContext>({
   totalDiscounts: 0,
   totalQuantity: 0,
   addProductToCart: () => {},
-  increaseProductQuantity: () => {},
   decreaseProductQuantity: () => {},
+  increaseProductQuantity: () => {},
   removeProductFromCart: () => {},
+  clearCart: () => {},
 });
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
@@ -84,6 +90,29 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const totalDiscounts =
     subtotalPrice - totalPrice + Number(products?.[0]?.restaurant?.deliveryFee);
 
+  const clearCart = () => {
+    return setProducts([]);
+  };
+
+  const decreaseProductQuantity = (productId: string) => {
+    return setProducts((prev) =>
+      prev.map((cartProduct) => {
+        if (cartProduct.id === productId) {
+          if (cartProduct.quantity === 1) {
+            return cartProduct;
+          }
+
+          return {
+            ...cartProduct,
+            quantity: cartProduct.quantity - 1,
+          };
+        }
+
+        return cartProduct;
+      }),
+    );
+  };
+
   const increaseProductQuantity = (productId: string) => {
     return setProducts((prev) =>
       prev.map((cartProduct) => {
@@ -99,21 +128,9 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     );
   };
 
-  const decreaseProductQuantity = (productId: string) => {
+  const removeProductFromCart = (productId: string) => {
     return setProducts((prev) =>
-      prev.map((cartProduct) => {
-        if (cartProduct.id === productId) {
-          if (cartProduct.quantity === 1) {
-            return cartProduct;
-          }
-          return {
-            ...cartProduct,
-            quantity: cartProduct.quantity - 1,
-          };
-        }
-
-        return cartProduct;
-      }),
+      prev.filter((product) => product.id !== productId),
     );
   };
 
@@ -160,23 +177,18 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     setProducts((prev) => [...prev, { ...product, quantity: quantity }]);
   };
 
-  const removeProductFromCart = (productId: string) => {
-    return setProducts((prev) =>
-      prev.filter((product) => product.id != productId),
-    );
-  };
-
   return (
     <CartContext.Provider
       value={{
         products,
         subtotalPrice,
         totalPrice,
-        totalQuantity,
         totalDiscounts,
+        totalQuantity,
+        clearCart,
         addProductToCart,
-        increaseProductQuantity,
         decreaseProductQuantity,
+        increaseProductQuantity,
         removeProductFromCart,
       }}
     >
