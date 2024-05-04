@@ -31,7 +31,7 @@ const Header = () => {
       <Link className="flex flex-row gap-2" href="/">
         <h1 className="text-2xl font-extrabold italic text-red-500">DEV</h1>
         <Image
-          src="/logo.png"
+          src="/public/logo.png"
           alt="Dev Foods"
           height={10}
           width={60}
