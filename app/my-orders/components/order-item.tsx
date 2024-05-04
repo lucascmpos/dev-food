@@ -60,9 +60,9 @@ const OrderItem = ({ order }: OrderItemProps) => {
   };
   return (
     <Card>
-      <CardContent className="p-5">
+      <CardContent className="p-5 lg:w-[50vw]">
         <div
-          className={`w-fit rounded-full bg-[#EEEEEE] px-2 py-1 text-muted-foreground ${order.status !== "COMPLETED" && "bg-green-500 text-white"}`}
+          className={`w-fit rounded-full bg-[#EEEEEE] px-2 py-1 text-muted-foreground  ${order.status !== "COMPLETED" && "bg-green-500 text-white"}`}
         >
           <span className="block text-xs font-semibold">
             {getOrderStatusLabel(order.status)}

@@ -19,11 +19,11 @@ const RecommendedRestaurants = async () => {
   return (
     <>
       <Header />
-      <div className="px-5 py-6">
+      <div className="flex  flex-col items-center  justify-center px-5 py-6 ">
         <h2 className="mb-6 text-lg font-semibold">
           Restaurantes recomendados
         </h2>
-        <div className="flex w-full flex-col gap-6">
+        <div className=" w-full   gap-6">
           {restaurants.map((restaurant) => (
             <RestaurantItem
               key={restaurant.id}

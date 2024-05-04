@@ -37,7 +37,7 @@ const Header = () => {
           className="flex flex-row items-center justify-center gap-2"
           href="/"
         >
-          <h1 className="text-4xl font-extrabold italic text-red-500">dev</h1>
+          <h1 className="text-4xl font-extrabold italic text-red-600">dev</h1>
           <Image
             src={Logo}
             alt="Tempo de entrega"
@@ -52,6 +52,7 @@ const Header = () => {
             size="icon"
             variant="outline"
             className="border-none bg-transparent"
+            asChild
           >
             <MenuIcon />
           </Button>
