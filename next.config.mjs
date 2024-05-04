@@ -2,6 +2,7 @@
 const nextConfig = {
     images: {
         remotePatterns:[{hostname: "utfs.io"}],
+        domains: ["images.pexels.com","miro.medium.com", "www.cnet.com"],
     },
 };
 

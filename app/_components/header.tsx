@@ -9,7 +9,7 @@ import {
   MenuIcon,
   ScrollText,
 } from "lucide-react";
-import Logo from "/logo.png";
+import Logo from "../../public/logo.png";
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
 import {
