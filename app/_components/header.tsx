@@ -9,7 +9,7 @@ import {
   MenuIcon,
   ScrollTextIcon,
 } from "lucide-react";
-import MotorBikeIcon from "../../public/motorbike.svg";
+import Logo from "../../public/logo.svg";
 
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
@@ -37,8 +37,12 @@ const Header = () => {
           className="flex flex-row items-center justify-center gap-2"
           href="/"
         >
-          <h1 className="text-3xl font-extrabold italic text-red-600">dev</h1>
-          <Image src={MotorBikeIcon} alt="Tempo de entrega" />
+          <h1 className="text-4xl font-extrabold italic text-red-600">dev</h1>
+          <Image
+            src={Logo}
+            alt="Tempo de entrega"
+            className="mt-2 w-20 fill-red-600"
+          />
         </Link>
       </div>
 
