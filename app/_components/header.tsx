@@ -31,14 +31,17 @@ const Header = () => {
   return (
     <div className="flex justify-between px-5 pt-6">
       <div className="">
-        <Link className="flex flex-row items-center gap-2" href="/">
-          <h1 className="text-2xl font-extrabold italic text-red-500">DEV</h1>
+        <Link
+          className="flex flex-row items-center justify-center gap-2"
+          href="/"
+        >
+          <h1 className="text-3xl font-extrabold italic text-red-600">dev</h1>
           <Image
             src="/logo.png"
             alt="Dev Food"
-            width={70}
+            width={60}
             height={30}
-            className="object-cover"
+            className="mt-1 object-cover"
           />
         </Link>
       </div>
