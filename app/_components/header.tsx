@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { Button } from "./ui/button";
 import {
   HeartIcon,
@@ -10,6 +9,8 @@ import {
   MenuIcon,
   ScrollTextIcon,
 } from "lucide-react";
+import MotorBikeIcon from "../../public/motorbike.svg";
+
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
 import {
@@ -21,6 +22,7 @@ import {
 } from "./ui/sheet";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Separator } from "./ui/separator";
+import Image from "next/image";
 
 const Header = () => {
   const { data } = useSession();
@@ -36,13 +38,7 @@ const Header = () => {
           href="/"
         >
           <h1 className="text-3xl font-extrabold italic text-red-600">dev</h1>
-          <Image
-            src="/logo.png"
-            alt="Dev Food"
-            width={60}
-            height={30}
-            className="mt-1 object-cover"
-          />
+          <Image src={MotorBikeIcon} alt="Tempo de entrega" />
         </Link>
       </div>
 
