@@ -9,6 +9,7 @@ import {
   MenuIcon,
   ScrollText,
 } from "lucide-react";
+import Logo from "../../public/logo.png";
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
 import {
@@ -31,7 +32,7 @@ const Header = () => {
       <Link className="flex flex-row gap-2" href="/">
         <h1 className="text-2xl font-extrabold italic text-red-500">DEV</h1>
         <Image
-          src="/logo.png"
+          src={Logo}
           alt="Dev Foods"
           height={10}
           width={60}
