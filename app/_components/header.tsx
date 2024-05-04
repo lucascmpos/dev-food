@@ -30,14 +30,12 @@ const Header = () => {
 
   return (
     <div className="flex justify-between px-5 pt-6">
-      <div className="">
-        <Link className="flex flex-row gap-2" href="/">
-          <h1 className="text-2xl font-extrabold italic text-red-500">DEV</h1>
+      <div className="relative h-[30px] w-[100px]">
+        <Link href="/">
           <Image
             src="/logo.png"
-            alt="Dev Food"
-            width={70}
-            height={30}
+            alt="Dev Foods"
+            fill
             className="object-cover"
           />
         </Link>
