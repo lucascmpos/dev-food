@@ -93,6 +93,7 @@ const ProductDetails = ({
               alt={product.restaurant.name}
               fill
               className="rounded-full object-cover"
+              sizes="100%"
             />
           </div>
           <span className="text-xs text-muted-foreground">

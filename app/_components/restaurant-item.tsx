@@ -54,6 +54,7 @@ const RestaurantItem = ({
               fill
               className="rounded-lg object-cover "
               alt={restaurant.name}
+              sizes="100%"
             />
           </Link>
           <div className="absolute left-2 top-2 flex items-center gap-[2px] rounded-full bg-white px-2 py-[2] text-black">
@@ -75,7 +76,7 @@ const RestaurantItem = ({
           <h3 className="text-sm font-semibold">{restaurant.name}</h3>
           <div className="flex gap-3">
             <div className="flex items-center gap-1">
-              <Image src={MotorBikeIcon} alt="Tempo de entrega" />
+              <Image src={MotorBikeIcon} alt="Tempo de entrega" sizes="100%" />
               <span className="text-xs text-muted-foreground">
                 {Number(restaurant.deliveryFee) === 0
                   ? "Entrega grátis"

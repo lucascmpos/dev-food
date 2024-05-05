@@ -42,6 +42,7 @@ const Header = () => {
             src={Logo}
             alt="Tempo de entrega"
             className="mt-2 w-20 fill-red-600"
+            sizes="100%"
           />
         </Link>
       </div>

@@ -22,6 +22,7 @@ const ProductImage = ({ product }: ProductImageProps) => {
         alt={product.name}
         fill
         className="object-cover"
+        sizes="100%"
       />
 
       <Button

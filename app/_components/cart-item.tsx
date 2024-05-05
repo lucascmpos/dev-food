@@ -34,6 +34,7 @@ const CartItem = ({ cartProduct }: CartItemProps) => {
             className="rounded-lg object-cover"
             src={cartProduct.imageUrl}
             alt={cartProduct.name}
+            sizes="100%"
             fill
           />
         </div>

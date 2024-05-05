@@ -16,7 +16,7 @@ const DeliveryInfo = ({ restaurant }: DeliveryInfoProps) => {
         <div className="flex flex-col items-center">
           <div className="flex items-center gap-2 text-muted-foreground">
             <span className="text-xs">Entrega</span>
-            <Image src={MotorBikeIcon} alt="Tempo de entrega" />
+            <Image src={MotorBikeIcon} alt="Tempo de entrega" sizes="100%" />
           </div>
           {Number(restaurant.deliveryFee) > 0 ? (
             <p className="text-xs font-semibold">

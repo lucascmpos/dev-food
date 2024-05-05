@@ -17,6 +17,7 @@ const CategoryItem = ({ category }: CategoryItemProps) => {
         alt={category.name}
         height={30}
         width={30}
+        sizes="100%"
       />
       <span className="text-sm font-semibold">{category.name}</span>
     </Link>
