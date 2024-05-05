@@ -16,7 +16,7 @@
 
 ## 📗 About
 
-This project consists of a food delivery platform, where the user logs in with Google, places orders, favorites restaurants, checks their orders and can search for restaurants.
+This project consists of a food delivery platform, where the user logs in with Google, make orders, favorites restaurants, checks their orders and can search for restaurants.
 
 ---
 
