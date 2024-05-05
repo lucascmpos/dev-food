@@ -31,14 +31,14 @@ This project consists of a food delivery platform, where the user logs in with G
 
 The project was developed using the following technologies
 
-- [React.js]
-- [Next.js]
-- [TypeScript]
-- [Tailwind CSS]
-- [Figma]
-- [PostgreSQL]
-- [Prisma ORM]
-- [Neon DB]
+- React.js
+- Next.js
+- TypeScript
+- Tailwind CSS
+- Figma
+- PostgreSQL
+- Prisma ORM
+- Neon DB
 
 ---
 
