@@ -11,8 +11,6 @@ const RestaurantList = async () => {
     where: { userId: session?.user?.id },
   });
 
-  console.log(userFavoriteRestaurants);
-
   return (
     <div className="flex flex-row gap-4 overflow-x-scroll px-5 lg:flex-wrap lg:items-center lg:justify-center lg:gap-24  lg:p-10 [&::-webkit-scrollbar]:hidden">
       {restaurants.map((restaurant) => (
