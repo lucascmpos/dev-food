@@ -20,6 +20,15 @@ This project consists of a food delivery platform, where the user logs in with G
 
 ---
 
+## 💻 Functionalities
+
+- Responsiveness (Mobile First)
+- Login with Google
+- Favorite restaurants
+- Check food orders
+
+---
+
 ## 👨‍🚀 Next Updates
 
 - Improve desktop responsiviness
