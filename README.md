@@ -1,9 +1,70 @@
-# Dev Food - Delivery de comida
+<h1 align="center">
+    <img src="https://ik.imagekit.io/4qca61gsh/devfood.png?updatedAt=1714924892566">
+    
+   
+</h1>
 
-## Este projeto consiste em uma plataforma de delivery de comida, onde o usuario loga com o Google, faz pedidos, favorita restaurantes, consulta seus pedidos e pode pesquisar por restaurantes.
+# Link to the app
 
-### Funcionalidades: Login com o google, responsividade, integração com banco de dados SQL.
+[Dev Food](https://devfoods.vercel.app/)
 
-### Link do deploy: https://devfoods.vercel.app/
+# 🔍 Summary
 
-#### Tecnologias: Next.js - Tailwind.css - ShadcnUI - NextAuth - PostgresSQL - Prisma 
+- [About](#-sobre)
+- [Tech Stack](#-tecnologias-utilizadas)
+- [How to download](#-como-baixar-o-projeto)
+
+## 📗 About
+
+This project consists of a food delivery platform, where the user logs in with Google, make orders, favorites restaurants, checks their orders and can search for restaurants.
+
+---
+
+## 💻 Functionalities
+
+- Responsiveness (Mobile First)
+- Login with Google
+- Favorite restaurants
+- Check food orders
+
+---
+
+## 👨‍🚀 Next Updates
+
+- Improve desktop responsiviness
+- More alert dialogs to confirm actions
+
+---
+
+## 🚀 Technologies used
+
+The project was developed using the following technologies
+
+- React.js
+- Next.js
+- TypeScript
+- Tailwind CSS
+- Figma
+- PostgreSQL
+- Prisma ORM
+- Neon DB
+
+---
+
+## 🎮 How to download
+
+```bash
+
+    # Clone the repository
+    $ git clone https://github.com/lucascmpos/dev-food
+
+    # Install the dependencies
+    $ npm i
+
+    # Started the project
+    $ npm run dev
+```
+
+---
+
+Developed by 🐉 Lucas Campos
