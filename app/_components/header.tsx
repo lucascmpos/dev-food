@@ -2,12 +2,18 @@
 
 import { Button } from "./ui/button";
 import {
+  CupSoda,
+  Dessert,
+  Fish,
   HeartIcon,
   HomeIcon,
   LogInIcon,
   LogOutIcon,
   MenuIcon,
+  Pizza,
+  Sandwich,
   ScrollTextIcon,
+  Utensils,
 } from "lucide-react";
 import Logo from "../../public/logo.svg";
 
@@ -105,7 +111,7 @@ const Header = () => {
           <div className="space-y-2">
             <Button
               variant="ghost"
-              className="w-full justify-start space-x-3 rounded-full text-sm font-normal"
+              className="w-full justify-start space-x-3 rounded-full text-sm font-normal    hover:bg-red-500 hover:text-white"
             >
               <HomeIcon size={16} />
               <span className="block">Início</span>
@@ -115,7 +121,7 @@ const Header = () => {
               <>
                 <Button
                   variant="ghost"
-                  className="w-full justify-start space-x-3 rounded-full text-sm font-normal"
+                  className="w-full justify-start space-x-3 rounded-full text-sm font-normal   hover:bg-red-500 hover:text-white"
                   asChild
                 >
                   <Link href="/my-orders">
@@ -126,7 +132,7 @@ const Header = () => {
 
                 <Button
                   variant="ghost"
-                  className="w-full justify-start space-x-3 rounded-full text-sm font-normal"
+                  className="w-full justify-start space-x-3 rounded-full text-sm font-normal  hover:bg-red-500 hover:text-white"
                   asChild
                 >
                   <Link href="/my-favorite-restaurants">
@@ -142,10 +148,80 @@ const Header = () => {
             <Separator />
           </div>
 
+          <div className="space-y-2">
+            <Button
+              variant="ghost"
+              className="w-full justify-start space-x-3 rounded-full text-sm font-normal hover:bg-red-500 hover:text-white"
+              asChild
+            >
+              <Link href="/categories/bfa46e64-8d0a-4be0-89b5-6051517b63ee/products">
+                <Utensils size={16} />
+                <span className="block">Brasileira</span>
+              </Link>
+            </Button>
+            <Button
+              variant="ghost"
+              className="w-full justify-start space-x-3 rounded-full text-sm font-normal hover:bg-red-500 hover:text-white"
+              asChild
+            >
+              <Link href="/categories/0ccf1445-4ed9-46b3-bbf9-4d4853527642/products">
+                <Sandwich size={16} />
+                <span className="block">Lanches</span>
+              </Link>
+            </Button>
+            <Button
+              variant="ghost"
+              className="w-full justify-start space-x-3 rounded-full text-sm font-normal hover:bg-red-500 hover:text-white"
+              asChild
+            >
+              <Link href="/categories/15d3e98b-da9d-41af-9c84-98d0604645b4/products">
+                <Pizza size={16} />
+                <span className="block">Pizza</span>
+              </Link>
+            </Button>
+
+            <Button
+              variant="ghost"
+              className="w-full justify-start space-x-3 rounded-full text-sm font-normal hover:bg-red-500 hover:text-white"
+              asChild
+            >
+              <Link href="/categories/16fb6edf-8014-45e7-8886-ee8364e0ca93/products">
+                <Fish size={16} />
+                <span className="block">Japonesa</span>
+              </Link>
+            </Button>
+
+            <Button
+              variant="ghost"
+              className="w-full justify-start space-x-3 rounded-full text-sm font-normal hover:bg-red-500 hover:text-white"
+              asChild
+            >
+              <Link href="/categories/9073df6c-3e2a-40ca-9da7-63127fdbe1c9/products">
+                <Dessert size={16} />
+                <span className="block">Sobremesas</span>
+              </Link>
+            </Button>
+
+            <Button
+              variant="ghost"
+              className="w-full justify-start space-x-3 rounded-full text-sm font-normal hover:bg-red-500 hover:text-white"
+              asChild
+            >
+              <Link href="/categories/b24b3785-3a7c-4d0a-a8b0-1f2f1fac1ac5/products">
+                <CupSoda size={16} />
+                <span className="block">Sucos</span>
+              </Link>
+            </Button>
+          </div>
+
+          <div className="py-6">
+            <Separator />
+          </div>
+
           {data?.user && (
             <Button
               variant="ghost"
-              className="w-full justify-start space-x-3 rounded-full text-sm font-normal"
+              className="w-full justify-start space-x-3 rounded-full text-sm font-normal hover:bg-red-500 hover:text-white"
               onClick={handleSignOutClick}
             >
               <LogOutIcon size={16} />
