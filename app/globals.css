@@ -54,6 +54,6 @@
   }
 
   body {
-    @apply text-foreground antialiased;
+    @apply flex h-screen flex-col text-foreground antialiased;
   }
 }

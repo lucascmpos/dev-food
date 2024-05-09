@@ -3,7 +3,7 @@ import { IoLogoGithub } from "react-icons/io";
 
 const Footer = () => {
   return (
-    <div className="flex justify-between bg-accent px-8 py-4 text-[0.625rem] opacity-75">
+    <div className="flex items-center justify-between bg-accent px-8 py-4 text-[0.625rem] opacity-75">
       <p>
         © 2024 Copyright <span className="font-semibold">Dev Food</span>{" "}
       </p>

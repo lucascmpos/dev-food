@@ -25,7 +25,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={poppins.className}>
         <AuthProvider>
-          <CartProvider>{children}</CartProvider>
+          <CartProvider>
+            <div className="flex-1">{children}</div>
+          </CartProvider>
           <Footer />
         </AuthProvider>
 
