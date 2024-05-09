@@ -72,7 +72,7 @@ const Header = () => {
 
           {data?.user ? (
             <>
-              <div className="flex justify-between pt-6">
+              <div className="flex  justify-between pt-6">
                 <div className="flex items-center gap-3">
                   <Avatar>
                     <AvatarImage
@@ -108,7 +108,7 @@ const Header = () => {
             <Separator />
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-1">
             <Button
               variant="ghost"
               className="w-full justify-start space-x-3 rounded-full text-sm font-normal    hover:bg-red-500 hover:text-white"
@@ -151,7 +151,7 @@ const Header = () => {
             <Separator />
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-1">
             <Button
               variant="ghost"
               className="w-full justify-start space-x-3 rounded-full text-sm font-normal hover:bg-red-500 hover:text-white"
