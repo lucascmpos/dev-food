@@ -137,7 +137,7 @@ const ProductDetails = ({
           </div>
         </div>
 
-        <div className="px-5">
+        <div className="w-full px-5 md:flex md:justify-center">
           <DeliveryInfo restaurant={product.restaurant} />
         </div>
 
@@ -151,9 +151,9 @@ const ProductDetails = ({
           <ProductList products={complementaryProducts} />
         </div>
 
-        <div className="mt-6 px-5">
+        <div className="mt-6 px-5 md:flex md:justify-center">
           <Button
-            className="w-full font-semibold"
+            className="w-full font-semibold md:w-1/2"
             onClick={handleAddToCartClick}
           >
             Adicionar à sacola
