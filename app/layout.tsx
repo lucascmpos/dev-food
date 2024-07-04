@@ -12,8 +12,8 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Dev Food",
-  description: "Created by Lucas Campos",
+  title: "dev food",
+  description: "Fooding delivery platform",
 };
 
 export default function RootLayout({
