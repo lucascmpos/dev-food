@@ -37,7 +37,7 @@ const Cart = ({ setIsOpen }: CartProps) => {
     useContext(CartContext);
 
   const handleFinishOrderClick = async () => {
-    if (!data?.user) return;
+    if (!data?.user) return router.push("/api/auth/signin");
 
     const restaurant = products[0].restaurant;
 

@@ -53,66 +53,68 @@ const Home = async () => {
   return (
     <>
       <Header />
-      <div className="px-5 pt-6">
-        <Search />
-      </div>
-
-      <div className="pt-6">
-        <CategoryList />
-      </div>
-
-      <div className="px-5 pt-6 lg:flex lg:flex-row  lg:justify-center">
-        <Link href={`/categories/${pizzasCategory?.id}/products`}>
-          <PromoBanner
-            src="/promo-banner01.png"
-            alt="Até 30% de desconto em pizzas!"
-          />
-        </Link>
-      </div>
-
-      <div className="space-y-4 pt-6">
-        <div className="flex items-center justify-between px-5">
-          <h2 className="font-semibold">Pedidos Recomendados</h2>
-
-          <Button
-            variant="ghost"
-            className="h-fit p-0 text-primary hover:bg-transparent"
-            asChild
-          >
-            <Link href="/products/recommended">
-              Ver todos
-              <ChevronRightIcon size={16} />
-            </Link>
-          </Button>
+      <div className="lg:container lg:mx-auto">
+        <div className="px-5 pt-6">
+          <Search />
         </div>
-        <ProductList products={products} />
-      </div>
 
-      <div className="px-5 pt-6 lg:flex lg:flex-row  lg:justify-center">
-        <Link href={`/categories/${burguersCategory?.id}/products`}>
-          <PromoBanner
-            src="/promo-banner02.png"
-            alt="A partir de R$17,90 em lanches"
-          />
-        </Link>
-      </div>
-
-      <div className="space-y-4 py-6">
-        <div className="flex items-center justify-between px-5">
-          <h2 className="font-semibold">Restaurantes Recomendados</h2>
-
-          <Button
-            variant="ghost"
-            className="h-fit p-0 text-primary hover:bg-transparent"
-            asChild
-          >
-            <Link href="/restaurants/recommended">
-              Ver todos
-              <ChevronRightIcon size={16} />
-            </Link>
-          </Button>
+        <div className="pt-6">
+          <CategoryList />
         </div>
-        <RestaurantList />
+
+        <div className="px-5 pt-6   lg:flex lg:flex-row lg:justify-center">
+          <Link href={`/categories/${pizzasCategory?.id}/products`}>
+            <PromoBanner
+              src="/promo-banner01.png"
+              alt="Até 30% de desconto em pizzas!"
+            />
+          </Link>
+        </div>
+
+        <div className="space-y-4 pt-6">
+          <div className="flex items-center justify-between px-5">
+            <h2 className="font-semibold">Pedidos Recomendados</h2>
+
+            <Button
+              variant="ghost"
+              className="h-fit p-0 text-primary hover:bg-transparent"
+              asChild
+            >
+              <Link href="/products/recommended">
+                Ver todos
+                <ChevronRightIcon size={16} />
+              </Link>
+            </Button>
+          </div>
+          <ProductList products={products} />
+        </div>
+
+        <div className="px-5 pt-6 lg:flex lg:flex-row  lg:justify-center">
+          <Link href={`/categories/${burguersCategory?.id}/products`}>
+            <PromoBanner
+              src="/promo-banner02.png"
+              alt="A partir de R$17,90 em lanches"
+            />
+          </Link>
+        </div>
+
+        <div className="space-y-4 py-6">
+          <div className="flex items-center justify-between px-5">
+            <h2 className="font-semibold">Restaurantes Recomendados</h2>
+
+            <Button
+              variant="ghost"
+              className="h-fit p-0 text-primary hover:bg-transparent"
+              asChild
+            >
+              <Link href="/restaurants/recommended">
+                Ver todos
+                <ChevronRightIcon size={16} />
+              </Link>
+            </Button>
+          </div>
+          <RestaurantList />
+        </div>
       </div>
     </>
   );

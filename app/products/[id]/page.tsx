@@ -37,7 +37,7 @@ const ProductsPage = async ({ params: { id } }: ProductsPageProps) => {
     },
   });
   return (
-    <div>
+    <div className="lg:container lg:mx-auto">
       <ProductImage product={product} />
       <ProductDetails product={product} complementaryProducts={juices} />
     </div>
