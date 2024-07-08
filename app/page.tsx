@@ -68,17 +68,17 @@ const Home = async () => {
         </div>
       </div>
 
-      <div className="container">
-        <div className="md:hidden">
+      <div className="md:container">
+        <div className="mt-5 px-5 md:hidden">
           <Search />
         </div>
 
-        <div className="mt-3">
+        <div className="my-3">
           <CategoryList />
         </div>
 
         <Link
-          className="md:hidden"
+          className=" md:hidden"
           href={`/categories/${pizzasCategory?.id}/products`}
         >
           <PromoBanner
@@ -87,7 +87,7 @@ const Home = async () => {
           />
         </Link>
 
-        <div className="space-y-4 pt-6">
+        <div className="mb-6 space-y-4">
           <div className="flex items-center justify-between px-5">
             <h2 className="font-semibold">Pedidos Recomendados</h2>
 
@@ -120,15 +120,17 @@ const Home = async () => {
           </Link>
         </div>
 
-        <Link
-          className="md:hidden"
-          href={`/categories/${burguerCategory?.id}/products`}
-        >
-          <PromoBanner
-            src={"/banner_promo_02.png"}
-            alt="a partir de R$ 17,90 em lanches."
-          />
-        </Link>
+        <div>
+          <Link
+            className="md:hidden "
+            href={`/categories/${burguerCategory?.id}/products`}
+          >
+            <PromoBanner
+              src={"/promo-banner02.png"}
+              alt="a partir de R$ 17,90 em lanches."
+            />
+          </Link>
+        </div>
 
         <div className="space-y-4 py-6">
           <div className="flex items-center justify-between px-5">

@@ -47,11 +47,11 @@ const ProductPage = async ({ params: { id } }: ProductPageProps) => {
     <>
       <Header isSearchBar={true} />
 
-      <div className="md:container md:mt-6">
+      <div className="mt-6 md:container">
         <div className="md:grid md:grid-cols-2 md:gap-4">
           <ProductImage product={JSON.parse(JSON.stringify(product))} />
 
-          <Card className="border-solid border-gray-300 bg-[#ececec]">
+          <Card className="border-solid border-gray-300 pt-6 ">
             <ProductDetails
               product={JSON.parse(JSON.stringify(product))}
               complementaryProducts={juices}
@@ -59,7 +59,7 @@ const ProductPage = async ({ params: { id } }: ProductPageProps) => {
           </Card>
         </div>
 
-        <div className="flex flex-col gap-2 sm:hidden md:col-span-2 md:block">
+        <div className="mb-5  hidden flex-col gap-2 px-5 sm:hidden md:col-span-2 md:mb-0 md:block">
           <h3 className="mt-6 font-bold">Bebidas</h3>
           <p className="text-sm text-muted-foreground">
             Adicione uma bebida ao seu pedido
