@@ -1,16 +1,18 @@
-import CategoryList from "./_components/category-list";
-import Header from "./_components/header";
-import Search from "./_components/search";
-import ProductList from "./_components/product-list";
-import { Button } from "./_components/ui/button";
-import { ChevronRightIcon } from "lucide-react";
-import { db } from "./_lib/prisma";
-import PromoBanner from "./_components/promo-banner";
-import RestaurantList from "./_components/restaurant-list";
+// Next
 import Link from "next/link";
+// Prisma
+import { db } from "./_lib/prisma";
+// Components
+import Search from "./_components/search";
+import PromoBanner from "./_components/promo-banner";
+import CategoryList from "./_components/category-list";
+import ProductList from "./_components/product-list";
+
+import RestaurantList from "./_components/restaurant-list";
+import Header from "./_components/header";
 
 const fetch = async () => {
-  const getProducts = db.product.findMany({
+  const getProducts = await db.product.findMany({
     where: {
       discountPercentage: {
         gt: 0,
@@ -26,95 +28,92 @@ const fetch = async () => {
     },
   });
 
-  const getBurguersCategory = db.category.findFirst({
+  const getBurguerCategory = await db.category.findFirst({
     where: {
       name: "Hambúrgueres",
     },
   });
 
-  const getPizzasCategory = db.category.findFirst({
+  const getPizzasCategory = await db.category.findFirst({
     where: {
       name: "Pizzas",
     },
   });
 
-  const [products, burguersCategory, pizzasCategory] = await Promise.all([
+  const [products, burguerCategory, pizzasCategory] = await Promise.all([
     getProducts,
-    getBurguersCategory,
+    getBurguerCategory,
     getPizzasCategory,
   ]);
 
-  return { products, burguersCategory, pizzasCategory };
+  return { products, burguerCategory, pizzasCategory };
 };
 
 const Home = async () => {
-  const { products, burguersCategory, pizzasCategory } = await fetch();
+  const { products, burguerCategory, pizzasCategory } = await fetch();
 
   return (
     <>
       <Header />
-      <div className="lg:container lg:mx-auto">
-        <div className="px-5 pt-6">
+
+      <div className="hidden md:mt-4 md:block md:w-full">
+        <div className="relative">
+          <PromoBanner
+            src={"/promo-banner03.png"}
+            alt="está com fome? com apenas alguns cliques...."
+          />
+
+          <div className="absolute left-[9%] top-[45%] w-1/2">
+            <Search />
+          </div>
+        </div>
+      </div>
+
+      <div className="container">
+        <div className="md:hidden">
           <Search />
         </div>
 
-        <div className="pt-6">
-          <CategoryList />
-        </div>
+        <CategoryList />
 
-        <div className="px-5 pt-6   lg:flex lg:flex-row lg:justify-center">
+        <Link
+          className="md:hidden"
+          href={`/categories/${pizzasCategory?.id}/products`}
+        >
+          <PromoBanner
+            src={"/promo-banner01.png"}
+            alt="até 30% de desconto em pizzas."
+          />
+        </Link>
+
+        <ProductList products={products} />
+
+        <div className="hidden md:mb-6 md:grid md:grid-cols-2 md:gap-4">
           <Link href={`/categories/${pizzasCategory?.id}/products`}>
             <PromoBanner
-              src="/promo-banner01.png"
-              alt="Até 30% de desconto em pizzas!"
+              src={"/promo-banner01.png"}
+              alt="até 30% de desconto em pizzas."
             />
           </Link>
-        </div>
-
-        <div className="space-y-4 pt-6">
-          <div className="flex items-center justify-between px-5">
-            <h2 className="font-semibold">Pedidos Recomendados</h2>
-
-            <Button
-              variant="ghost"
-              className="h-fit p-0 text-primary hover:bg-transparent"
-              asChild
-            >
-              <Link href="/products/recommended">
-                Ver todos
-                <ChevronRightIcon size={16} />
-              </Link>
-            </Button>
-          </div>
-          <ProductList products={products} />
-        </div>
-
-        <div className="px-5 pt-6 lg:flex lg:flex-row  lg:justify-center">
-          <Link href={`/categories/${burguersCategory?.id}/products`}>
+          <Link href={`/categories/${burguerCategory?.id}/products`}>
             <PromoBanner
-              src="/promo-banner02.png"
-              alt="A partir de R$17,90 em lanches"
+              src={"/promo-banner02.png"}
+              alt="a partir de R$ 17,90 em lanches."
             />
           </Link>
         </div>
 
-        <div className="space-y-4 py-6">
-          <div className="flex items-center justify-between px-5">
-            <h2 className="font-semibold">Restaurantes Recomendados</h2>
+        <Link
+          className="md:hidden"
+          href={`/categories/${burguerCategory?.id}/products`}
+        >
+          <PromoBanner
+            src={"/banner_promo_02.png"}
+            alt="a partir de R$ 17,90 em lanches."
+          />
+        </Link>
 
-            <Button
-              variant="ghost"
-              className="h-fit p-0 text-primary hover:bg-transparent"
-              asChild
-            >
-              <Link href="/restaurants/recommended">
-                Ver todos
-                <ChevronRightIcon size={16} />
-              </Link>
-            </Button>
-          </div>
-          <RestaurantList />
-        </div>
+        <RestaurantList />
       </div>
     </>
   );
