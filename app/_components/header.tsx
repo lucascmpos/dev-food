@@ -42,7 +42,7 @@ const Header = ({ isSearchBar }: HeaderProps) => {
   const handleSignInClick = () => signIn();
 
   return (
-    <div className="flex justify-between px-5 pt-6">
+    <div className="flex items-center justify-between px-5 pt-6">
       <div className="">
         <Link
           className="flex flex-row items-center justify-center gap-2"
