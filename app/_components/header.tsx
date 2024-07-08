@@ -29,8 +29,13 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Separator } from "./ui/separator";
 import Image from "next/image";
+import Search from "./search";
 
-const Header = () => {
+interface HeaderProps {
+  isSearchBar?: boolean;
+}
+
+const Header = ({ isSearchBar }: HeaderProps) => {
   const { data } = useSession();
 
   const handleSignOutClick = () => signOut();
@@ -52,6 +57,12 @@ const Header = () => {
           />
         </Link>
       </div>
+
+      {isSearchBar && (
+        <div className="hidden w-1/2 md:block">
+          <Search />
+        </div>
+      )}
 
       <Sheet>
         <SheetTrigger>

@@ -45,7 +45,7 @@ const ProductPage = async ({ params: { id } }: ProductPageProps) => {
 
   return (
     <>
-      <Header />
+      <Header isSearchBar={true} />
 
       <div className="md:container md:mt-6">
         <div className="md:grid md:grid-cols-2 md:gap-4">
