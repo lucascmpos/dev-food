@@ -1,18 +1,38 @@
-import { db } from "@/app/_lib/prisma";
+// Next
 import { notFound } from "next/navigation";
+// Prisma
+import { db } from "@/app/_lib/prisma";
+// Components
+import ProductList from "@/app/_components/product-list";
+import { Card } from "@/app/_components/ui/card";
+import Header from "@/app/_components/header";
 import ProductImage from "./components/product-image";
 import ProductDetails from "./components/product-details";
 
-interface ProductsPageProps {
+interface ProductPageProps {
   params: {
     id: string;
   };
 }
 
-const ProductsPage = async ({ params: { id } }: ProductsPageProps) => {
+const ProductPage = async ({ params: { id } }: ProductPageProps) => {
   const product = await db.product.findUnique({
     where: {
       id,
+    },
+    include: {
+      restaurant: true,
+    },
+  });
+
+  const juices = await db.product.findMany({
+    where: {
+      category: {
+        name: "Sucos",
+      },
+      restaurant: {
+        id: product?.restaurant.id,
+      },
     },
     include: {
       restaurant: true,
@@ -23,25 +43,32 @@ const ProductsPage = async ({ params: { id } }: ProductsPageProps) => {
     return notFound();
   }
 
-  const juices = await db.product.findMany({
-    where: {
-      category: {
-        name: "Sucos",
-      },
-      restaurant: {
-        id: product?.restaurantId,
-      },
-    },
-    include: {
-      restaurant: true,
-    },
-  });
   return (
-    <div className="lg:container lg:mx-auto">
-      <ProductImage product={product} />
-      <ProductDetails product={product} complementaryProducts={juices} />
-    </div>
+    <>
+      <Header />
+
+      <div className="md:container md:mt-6">
+        <div className="md:grid md:grid-cols-2 md:gap-4">
+          <ProductImage product={JSON.parse(JSON.stringify(product))} />
+
+          <Card className="border-solid border-gray-300 bg-[#ececec]">
+            <ProductDetails
+              product={JSON.parse(JSON.stringify(product))}
+              complementaryProducts={juices}
+            />
+          </Card>
+        </div>
+
+        <div className="flex flex-col gap-2 sm:hidden md:col-span-2 md:block">
+          <h3 className="mt-6 font-bold">Bebidas</h3>
+          <p className="text-sm text-muted-foreground">
+            Adicione uma bebida ao seu pedido
+          </p>
+          <ProductList products={juices} />
+        </div>
+      </div>
+    </>
   );
 };
 
-export default ProductsPage;
+export default ProductPage;

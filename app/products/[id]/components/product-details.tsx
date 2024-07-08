@@ -1,19 +1,10 @@
 "use client";
 
-import Cart from "@/app/_components/cart";
-import DeliveryInfo from "@/app/_components/delivery-info";
-import DiscountBadge from "@/app/_components/discount-badge";
-import ProductList from "@/app/_components/product-list";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/app/_components/ui/alert-dialog";
+import { useContext, useState } from "react";
+import Image from "next/image";
+import { CartContext } from "@/app/_context/cart";
+import { Prisma } from "@prisma/client";
+
 import { Button } from "@/app/_components/ui/button";
 import {
   Sheet,
@@ -21,15 +12,25 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/app/_components/ui/sheet";
-import { CartContext } from "@/app/_context/cart";
+import Cart from "@/app/_components/cart";
 import {
-  formatCurrency,
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/app/_components/ui/alert-dialog";
+import {
   calculateProductTotalPrice,
+  formatCurrency,
 } from "@/app/_helpers/price";
-import { Prisma } from "@prisma/client";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
-import Image from "next/image";
-import { useContext, useState } from "react";
+import ProductList from "@/app/_components/product-list";
+import DeliveryInfo from "@/app/_components/delivery-info";
+import DiscountBadge from "@/app/_components/discount-badge";
 
 interface ProductDetailsProps {
   product: Prisma.ProductGetPayload<{
@@ -57,10 +58,11 @@ const ProductDetails = ({
 
   const addToCart = ({ emptyCart }: { emptyCart?: boolean }) => {
     addProductToCart({ product: { ...product, quantity }, emptyCart });
+
     setIsCartOpen(true);
   };
 
-  const handleAddToCartClick = () => {
+  const handleAddToCart = () => {
     const hasDifferentRestaurantProduct = products.some(
       (cartProduct) => cartProduct.restaurantId !== product.restaurantId,
     );
@@ -74,26 +76,30 @@ const ProductDetails = ({
     });
   };
 
-  const handleIncreaseQuantityClick = () =>
-    setQuantity((currentState) => currentState + 1);
-  const handleDecreaseQuantityClick = () =>
-    setQuantity((currentState) => {
-      if (currentState === 1) return 1;
+  const handleIncreaceProductQuantity = () => {
+    setQuantity((state) => state + 1);
+  };
 
-      return currentState - 1;
+  const handleDecreaseProductQuantity = () => {
+    setQuantity((state) => {
+      if (state === 1) {
+        return 1;
+      }
+      return state - 1;
     });
+  };
 
   return (
     <>
-      <div className="relative z-50 mt-[-1.5rem] rounded-tl-3xl rounded-tr-3xl bg-white py-5">
-        <div className="flex items-center gap-[0.375rem] px-5">
+      <div className="relative z-50 mt-[-1.5rem] rounded-tl-3xl rounded-tr-3xl bg-[#ececec] p-5 md:z-0 md:mt-0 md:block md:rounded-lg md:p-6">
+        {/* Produto */}
+        <div className="flex items-center gap-2">
           <div className="relative h-6 w-6">
             <Image
               src={product.restaurant.imageUrl}
               alt={product.restaurant.name}
               fill
               className="rounded-full object-cover"
-              sizes="100%"
             />
           </div>
           <span className="text-xs text-muted-foreground">
@@ -101,12 +107,12 @@ const ProductDetails = ({
           </span>
         </div>
 
-        <h1 className="mb-2 mt-1 px-5 text-xl font-semibold">{product.name}</h1>
+        <h1 className="text-xl font-bold">{product.name}</h1>
 
-        <div className="flex justify-between px-5">
+        <div className="mt-4 flex justify-between">
           <div>
             <div className="flex items-center gap-2">
-              <h2 className="text-xl font-semibold">
+              <h2 className="text-xl font-bold">
                 {formatCurrency(calculateProductTotalPrice(product))}
               </h2>
               {product.discountPercentage > 0 && (
@@ -115,7 +121,7 @@ const ProductDetails = ({
             </div>
 
             {product.discountPercentage > 0 && (
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-muted-foreground line-through">
                 De: {formatCurrency(Number(product.price))}
               </p>
             )}
@@ -124,49 +130,46 @@ const ProductDetails = ({
           <div className="flex items-center gap-3 text-center">
             <Button
               size="icon"
-              variant="ghost"
-              className="border border-solid border-muted-foreground"
-              onClick={handleDecreaseQuantityClick}
+              variant={"ghost"}
+              className="border border-muted-foreground"
+              onClick={handleDecreaseProductQuantity}
             >
               <ChevronLeftIcon />
             </Button>
             <span className="w-4">{quantity}</span>
-            <Button size="icon" onClick={handleIncreaseQuantityClick}>
+            <Button size="icon" onClick={handleIncreaceProductQuantity}>
               <ChevronRightIcon />
             </Button>
           </div>
         </div>
 
-        <div className="w-full px-5 md:flex md:justify-center">
-          <DeliveryInfo restaurant={product.restaurant} />
-        </div>
+        <DeliveryInfo restaurant={product.restaurant} />
 
-        <div className="mt-6 space-y-3 px-5">
-          <h3 className="font-semibold">Sobre</h3>
+        <div className="flex flex-col gap-2">
+          <h3 className="mt-6 font-bold">Descrição</h3>
           <p className="text-sm text-muted-foreground">{product.description}</p>
         </div>
 
-        <div className="mt-6 space-y-3">
-          <h3 className="px-5 font-semibold">Sucos</h3>
+        <div className="flex flex-col gap-2 md:hidden">
+          <h3 className="mt-6 font-bold">Bebidas</h3>
+          <p className="text-sm text-muted-foreground">
+            Adicione uma bebida ao seu pedido
+          </p>
           <ProductList products={complementaryProducts} />
         </div>
 
-        <div className="mt-6 px-5 md:flex md:justify-center">
-          <Button
-            className="w-full font-semibold md:w-1/2"
-            onClick={handleAddToCartClick}
-          >
+        <div className="mt-6">
+          <Button className="w-full font-semibold" onClick={handleAddToCart}>
             Adicionar à sacola
           </Button>
         </div>
       </div>
 
       <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>
-        <SheetContent className="w-[90vw]">
+        <SheetContent className="w-[80vw]">
           <SheetHeader>
             <SheetTitle className="text-left">Sacola</SheetTitle>
           </SheetHeader>
-
           <Cart setIsOpen={setIsCartOpen} />
         </SheetContent>
       </Sheet>
@@ -178,17 +181,18 @@ const ProductDetails = ({
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>
-              Você só pode adicionar itens de um restaurante por vez
+              Deseja realmente adicionar o produto?
             </AlertDialogTitle>
             <AlertDialogDescription>
-              Deseja mesmo adicionar esse produto? Isso limpará sua sacola
-              atual.
+              Caso escolha adicionar produto de restaurante diferente,
+              acarretará na criação de uma nova sacola referente ao restaurante
+              escolhido.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancelar</AlertDialogCancel>
             <AlertDialogAction onClick={() => addToCart({ emptyCart: true })}>
-              Adicionar mesmo assim
+              Adicionar
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

@@ -1,8 +1,5 @@
-// Next
 import Link from "next/link";
-// Prisma
 import { db } from "./_lib/prisma";
-// Components
 import Search from "./_components/search";
 import PromoBanner from "./_components/promo-banner";
 import CategoryList from "./_components/category-list";
